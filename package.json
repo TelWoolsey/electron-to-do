@@ -1,0 +1,14 @@
+{
+  "name": "electron-shopping-list",
+  "version": "1.0.0",
+  "description": "to do desktop app using electron framework",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Tel Woolsey",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^2.0.1"
+  }
+}
