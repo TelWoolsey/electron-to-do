@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow;
 let addWindow;
@@ -10,9 +10,6 @@ let addWindow;
 
 // Plan for improvements:
 // What about having a recipe section so that when you input the ingredients to a recipe it will add all the items to your list then you can plan ahead and get enough items to make multiple things using similar ingredients.
-
-
-
 
 // Listen for app to be ready
 
@@ -49,7 +46,15 @@ app.on('ready', function() {
 		addWindow.on('close', function() {
 			addWindow = null;
 		});
-	}
+	};
+
+	// Catch item:add
+	ipcMain.on('item:add', function(e, item){
+
+		mainWindow.webContents.send('item:add', item);
+		addWindow.close();
+	})
+
 	//Create menu template
 	const mainMenuTemplate = [
 

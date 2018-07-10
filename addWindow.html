@@ -4,7 +4,7 @@
 <head>
   <title>Shopping List</title>
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
 
 </head>
 
@@ -20,15 +20,20 @@
 </body>
 
 <script>
+	// Bring in Electron
 	const electron = require('electron');
+	// Communicate asynchronously from a renderer (web page) process to the main process. Basically, let your webpage talk to the main application backend
 	const {ipcRenderer} = electron;
 
+	// Takes value from the form on the submit event and saves value in the console
 	const form = document.querySelector('form');
 	form.addEventListener('submit', submitForm);
 
 	function submitForm(e) {
 		e.preventDefault();
-		console.log(123);
+		const item = document.querySelector('#item').value;
+		// Sends value of 'item' to app.js
+		ipcRenderer.send('item:add', item);
 	}
 </script>
 </html>
